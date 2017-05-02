@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  zane.exceptioncloud.test:
+    image: zane.exceptioncloud.test
+    build:
+      context: ./Zane.ExceptionCloud.Test
+      dockerfile: Dockerfile
