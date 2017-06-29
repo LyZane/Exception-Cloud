@@ -66,8 +66,13 @@ namespace Zane.ExceptionCloud.Web.Controllers
         {
             StringBuilder sb = new StringBuilder();
             JsonSerializer serializer = new JsonSerializer() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore, MissingMemberHandling = MissingMemberHandling.Ignore };
-            serializer.ContractResolver = new CustomResolver();
+            //serializer.ContractResolver = new CustomResolver();
             serializer.Converters.Add(new MemoryStreamJsonConverter());
+            serializer.Error += delegate (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+            {
+            
+                args.ErrorContext.Handled = true;
+            };
             StringWriter sw = new StringWriter(sb);
             serializer.Serialize(sw, obj);
             return sb.ToString();
